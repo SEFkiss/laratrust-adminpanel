@@ -34,9 +34,15 @@
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <select class="form-control" id="role_id" name="role_id">
-                    @if(count($roles))
+                    <option value="" >-- Roles --</option>
+                    @if(count($roles)) //if roles empty
+                    
                     @foreach($roles as $row)
-                    <option value="{{$row->id}}" {{$row->id == $user->roles[0]->id ? 'selected="selected"' : ''}}>{{$row->name}}</option>
+                        @if (count($user->roles))
+                            <option value="{{$row->id}}" {{$row->id == $user->roles[0]->id ? 'selected="selected"' : ''}}>{{$row->name}}</option>
+                        @else
+                            <option value="{{$row->id}}" >{{$row->name}}</option>
+                        @endif
                     @endforeach
                     @endif
                 </select>
